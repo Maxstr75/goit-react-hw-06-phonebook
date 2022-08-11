@@ -14,7 +14,9 @@ const filter = createReducer('', {
   [actions.handleFilter]: (_, { payload }) => payload,
 });
 
-export const contactReducers = combineReducers({
+const contactReducers = combineReducers({
   items,
   filter,
 });
+
+export { contactReducers };
