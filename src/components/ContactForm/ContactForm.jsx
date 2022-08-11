@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Label, Input, Button } from './ContactForm.styled';
+import { useState } from 'react';
+import { Button, Form, Input, Label } from './ContactForm.styled';
 
 function ContactForm({ onSubmit }) {
   const [name, setName] = useState('');
