@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import { Button, Form, Input, Label } from './ContactForm.styled';
 import { getItemsValueState } from 'redux/Contacts/contactsSelectors';
@@ -47,14 +46,8 @@ const ContactForm = () => {
   const handleSubmit = event => {
     event.preventDefault();
     reset();
-    // const newContact = {
-    //   id: nanoid(),
-    //   name,
-    //   number,
-    // };
 
-    // dispatch(addContacts(newContact));
-    return addContacts({ id: nanoid(), name, number });
+    return addContacts({ name, number });
   };
 
   const reset = () => {
