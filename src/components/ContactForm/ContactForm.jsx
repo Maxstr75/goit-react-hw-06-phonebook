@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import { Button, Form, Input, Label } from './ContactForm.styled';
 import { getItemsValueState } from 'redux/Contacts/contactsSelectors';
@@ -29,12 +30,15 @@ const ContactForm = () => {
   };
 
   const addContacts = ({ name, number }) => {
-    const normalizedName = name.toLowerCase();
-    const uniqueNumber = number;
-    if (contacts.find(({ name }) => name.toLowerCase() === normalizedName)) {
-      alert(`${name} is already in contacts`);
-    } else if (contacts.find(({ number }) => number === uniqueNumber)) {
-      alert(`${number} is already in contacts`);
+    const findName = contacts.find(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
+    if (findName) {
+      return alert(`${name} is already in contacts.`);
+    }
+    const findNumber = contacts.find(contact => contact.number === number);
+    if (findNumber) {
+      return alert(`This phone number is already in use.`);
     } else {
       return dispatch(actions.addContact({ name, number }));
     }
@@ -43,7 +47,14 @@ const ContactForm = () => {
   const handleSubmit = event => {
     event.preventDefault();
     reset();
-    return addContacts({ name, number });
+    // const newContact = {
+    //   id: nanoid(),
+    //   name,
+    //   number,
+    // };
+
+    // dispatch(addContacts(newContact));
+    return addContacts({ id: nanoid(), name, number });
   };
 
   const reset = () => {

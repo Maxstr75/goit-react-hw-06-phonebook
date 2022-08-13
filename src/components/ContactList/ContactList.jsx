@@ -5,27 +5,30 @@ import * as actions from '../../redux/Contacts/contactsActions';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getItemsValueState,
-  // getFilterValueState,
+  getFilterValueState,
 } from 'redux/Contacts/contactsSelectors';
 
 const ContactList = () => {
   const contacts = useSelector(getItemsValueState);
   const dispatch = useDispatch();
-  // const filter = useSelector(getFilterValueState);
+  const filter = useSelector(getFilterValueState);
   const deleteContacts = contactsId => {
     dispatch(actions.deleteContact(contactsId));
   };
-  // Область видимых контактов
-  // const getVisibleContacts = () => {
-  //   const normaLizedFilter = filter.tolowerCase;
-  //   return contacts.filter(({ name }) =>
-  //     name.toLowerCase().includes(normaLizedFilter)
-  //   );
-  // };
+
+  // Возвращает результат фильтра
+  const filterContacts = () => {
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(({ name }) =>
+      name.toLowerCase().includes(normalizedFilter)
+    );
+  };
+
+  const visibleContacts = filterContacts();
 
   return (
     <List>
-      {contacts.map(({ id, name, number }) => (
+      {visibleContacts.map(({ id, name, number }) => (
         <ContactItem
           key={id}
           id={id}
@@ -46,7 +49,7 @@ ContactList.propTypes = {
       number: PropTypes.string.isRequired,
     })
   ),
-  onDeleteContact: PropTypes.func.isRequired,
+  onDeleteContact: PropTypes.func,
 };
 
 export default ContactList;
