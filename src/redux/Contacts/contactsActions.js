@@ -9,5 +9,4 @@ export const addContact = createAction(
 );
 
 export const deleteContact = createAction('contacts/deleteContact');
-
 export const handleFilter = createAction('contacts/handleFilter');
