@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+// Рефакторинг кода с классов на хуки
 export const useLocalStorage = (key, defaultValue) => {
   const [value, setValue] = useState(() => {
     let currentValue;
